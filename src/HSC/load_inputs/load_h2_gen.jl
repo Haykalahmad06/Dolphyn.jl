@@ -71,6 +71,14 @@ function load_h2_gen(setup::Dict, path::AbstractString, sep::AbstractString, inp
     end
     inputs_gen["H2_ELECTROLYZER"] = union(H2_electrolyzer_declared, H2_Electrolyzer_infered)
 
+
+    # Set of retrofit resources
+    if "H2_RETRO" in h2_gen_in_names
+    	inputs_gen["H2_RETRO"] = gen_in[gen_in.RETRO .== 1, :R_ID]
+    else
+    	inputs_gen["H2_RETRO"] = Int64[]
+    end
+	
     #BLUE_H2
     if "Blue_H2" in h2_gen_in_names
         blue_h2_declared = h2_gen_in[h2_gen_in.Blue_H2.==1,:R_ID]
